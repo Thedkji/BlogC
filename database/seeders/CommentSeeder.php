@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,9 @@ class CommentSeeder extends Seeder
     {
         for ($i = 0; $i < 20; $i++) {
             Comment::create([
-                "comment" => fake()->text()
+                "post_id" => mt_rand(1, 20),
+                "author_id" => mt_rand(1, 20),
+                "comment" => fake()->text(),
             ]);
         }
     }

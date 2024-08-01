@@ -15,7 +15,7 @@ class TagSeeder extends Seeder
     {
         for ($i = 0; $i < 20; $i++) {
             Tag::create([
-                "name" => "Tag $i"
+                "tag_name" => "Tag $i"
             ]);
         }
     }

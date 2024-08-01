@@ -15,8 +15,11 @@ class PostSeeder extends Seeder
     {
         for ($i = 0; $i < 20; $i++) {
             Post::create([
+                "category_id" => mt_rand(1, 20),
+                "author_id" => mt_rand(1, 20),
                 "title" => fake()->title(),
                 "img" => "",
+                "content" => fake()->text(),
                 "view_like" => mt_rand(1, 300),
             ]);
         }

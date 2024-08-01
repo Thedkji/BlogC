@@ -14,15 +14,14 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->string('user_name', 40)->unique();
-            $table->string('user_name', 40)->unique();
-            $table->string('pass', 40);
+            $table->string('pass');
             $table->string('name', 40)->nullable();
             $table->string('avatar')->nullable();
             $table->string('bio', 50)->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('phone', 20)->nullable()->unique();
-            $table->enum('enum', ['admin', 'client'])->default('client');
+            $table->enum('role', ['admin', 'client'])->default('client');
             $table->timestamps();
             $table->softDeletes();
         });

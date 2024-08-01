@@ -26,10 +26,10 @@ class AuthorSeeder extends Seeder
                 'name' => Arr::random($ho) . " " . Arr::random($lot) . " " . Arr::random($ten),
                 'avatar' => "",
                 'bio' => "Đây là bio của name $i",
-                'date_of_birth' => "",
+                'date_of_birth' => fake()->date(),
                 'email' => "email$i@gmail.com",
                 'phone' => Arr::random($phone) . str_shuffle("0123456789"),
-                'role' => Arr::random(["admin", ""]),
+                'role' => Arr::random(["admin", "client"]),
             ]);
         }
     }

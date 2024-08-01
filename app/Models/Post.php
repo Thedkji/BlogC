@@ -12,6 +12,7 @@ class Post extends Model
     protected $fillable = [
         "title",
         "img",
+        "content",
         "view_like",
     ];
 
@@ -25,8 +26,13 @@ class Post extends Model
         return $this->belongsTo(Author::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'post_tags');
     }
 }

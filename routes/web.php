@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\clients\CategoryController;
+use App\Http\Controllers\clients\PostController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('client.index');
 });
+
+// client
+
+// Post
+Route::prefix('client')
+    ->name('client.')
+    ->group(function () {
+        Route::get('/', [PostController::class, 'index'])->name('index');
+        Route::get('/{id}/category', [CategoryController::class, 'category'])->name('category');
+        Route::get('/{id}/post-detail', [PostController::class, 'postDetail'])->name('postDetail');
+        Route::get('/search', [PostController::class, 'search'])->name('search');
+    });
