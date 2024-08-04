@@ -45,10 +45,14 @@ Route::prefix('admin')
         Route::get('/login', [UserController::class, 'login'])->name('login');
         Route::post('/login', [UserController::class, 'loginPost'])->name('login-post');
 
+        // Register
         Route::get('/register', [UserController::class, 'register'])->name('register');
         Route::post('/register', [UserController::class, 'registerPost'])->name('register-post');
 
+        // Logout
         Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+        Route::get('/forgot-pass', [UserController::class, 'forgotPass'])->name('forgot-pass');
 
         // Categories
         Route::name('category.')

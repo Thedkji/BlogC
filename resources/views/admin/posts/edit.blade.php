@@ -53,6 +53,7 @@
                             <div class="mb-2">
                                 <label for="" class="form-label">Ảnh</label>
                                 <input type="file" name="img" class="form-control">
+                                <img src="{{ env('APP_STORAGE_IMG') }}/post/{{ $data->img }}" alt="" width="200px" class="mt-3">
                             </div>
 
                             <div class="mb-2 w-25">

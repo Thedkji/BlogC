@@ -10,7 +10,7 @@
                 <form action="{{ route('admin.post.store') }}" method="post" class="w-100 mt-4" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="mb-2">
                                 <label for="" class="form-label">Tiêu đề</label>
                                 <input type="text" name="title" class="form-control" value="{{ old('title') }}">
@@ -49,14 +49,14 @@
                                 <label for="" class="form-label">Lượt thích</label>
                                 <input type="number" name="view_like" class="form-control" value="{{ old('view_like') }}">
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
                             <div class="mb-2">
                                 <label for="" class="form-label">Nội dung</label>
                                 <textarea name="content" id="content" cols="30" rows="10" style="height: 400px;">{{ old('content') }}</textarea>
                             </div>
                         </div>
+
+
 
                     </div>
                     <span>

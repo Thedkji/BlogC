@@ -12,8 +12,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        $dataPost = Post::query()->latest('id')->paginate(5);
-        // dd($dataCate);
+        $dataPost = Post::query()->latest('id')->paginate(5); 
+        
         return view('admin.posts.post', compact('dataPost'));
     }
 
@@ -36,7 +36,7 @@ class PostController extends Controller
         if ($request->hasFile('img')) {
             $file = $request->file('img');
             $fileName = time() . "_" . $file->getClientOriginalName();
-            $file->storeAs('imgs/posts', $fileName);
+            $file->storeAs('imgs/post', $fileName);
 
             $data = $request->except('img'); //loại bỏ trường img ra khỏi request debug ra sẽ thấy data là 1 mảng
             // dd($data);
@@ -66,6 +66,8 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $data = Post::query()->find($id);
+
+
         return view('admin.posts.edit', compact('data'));
     }
 
@@ -74,10 +76,26 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, string $id)
     {
-        $data = Post::query()->find($id);
-        $data->update($request->all());
+        $post = Post::query()->find($id); //tìm kiếm sản phẩm với id định sửa
 
-        return redirect()->route('admin.post.edit', $data->id)->with('message', 'Sửa thành công');
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $fileName = time() . "_" . $file->getClientOriginalName();
+            $file->storeAs('imgs/post', $fileName);
+
+            //Kiểm tra nếu có file thì loại bỏ trường img cũ trong model và tiến hành create
+            $data = $request->except('img'); //loại bỏ trường img ra khỏi request debug ra sẽ thấy data là 1 mảng
+            // dd($data);
+            if ($fileName) {
+                $data['img'] = $fileName; //thêm dữ liệu img mới vào mảng
+            }
+        } else {
+            $data = $request->except('img'); //loại bỏ trường img để lấy data 
+            $data['img'] = $post->img; //giữ nguyên hình ảnh nếu ko thay đổi
+        };
+
+        Post::query()->update($data);  //dữ liệu mới sau khi đã sử lý ảnh
+        return redirect()->route('admin.post.edit', $id)->with('message', 'Sửa thành công');
     }
 
     /**
@@ -88,7 +106,6 @@ class PostController extends Controller
         $post = Post::query()->find($id);
 
         $post->delete();
-
         return redirect()->route('admin.post.index')->with('message', 'Xóa loại tin thành công');
     }
 }

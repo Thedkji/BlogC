@@ -21,19 +21,12 @@ class PostRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('id');
-        // dd($id);
-        return [
-            "title" => [
-                "unique:posts,title,$id"
-            ],
-        ];
+
+        return [];
     }
 
     public function messages(): array
     {
-        return [
-            "title.unique" => "Tiêu đề đã tồn tại vui lòng thử tên khác",
-        ];
+        return [];
     }
 }

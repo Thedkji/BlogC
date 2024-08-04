@@ -3,6 +3,9 @@
         <img class="img-fluid" width="100px" src="{{ env('APP_URL') }}/reader/images/logo.png"
             alt="Reader | Hugo Personal Blog Template">
     </a>
+    @error('message')
+        <p class="alert alert-success">{{ session('message') }}</p>
+    @enderror
     <div class="collapse navbar-collapse text-center order-lg-2 order-3" id="navigation">
         <ul class="navbar-nav mx-auto">
             <li class="nav-item dropdown">
@@ -35,10 +38,31 @@
 
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.login') }}">Đăng nhập</a>
-                {{-- <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a> --}}
-            </li>
+            @if (!Auth::check())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.login') }}">Đăng Nhập</a>
+                </li>
+            @endif
+
+            @if (Auth::check() && Auth::user()->type == 0)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.logout') }}">Đăng xuất</a>
+                </li>
+            @endif
+
+            @if (Auth::check() && Auth::user()->type == 1)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                    <a class="nav-link" href="{{ route('admin.logout') }}">Đăng xuất</a>
+                </li>
+            @endif
+
+            @if (Auth::check() && Auth::user()->type == 2)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.login') }}">Đăng bài</a>
+                    <a class="nav-link" href="{{ route('admin.logout') }}">Đăng xuất</a>
+                </li>
+            @endif
         </ul>
     </div>
 

@@ -13,6 +13,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
+    const TYPE_CLIENT = 0;
+    const TYPE_ADMIN = 1;
+    const TYPE_AUTHOR = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'is_author',
+        'type',
     ];
 
     /**
@@ -43,4 +46,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isClient()
+    {
+        return $this->type == self::TYPE_CLIENT;
+    }
+
+    public function isAdmin()
+    {
+        return $this->type == self::TYPE_ADMIN;
+    }
+
+    public function isAuthor()
+    {
+        return $this->type == self::TYPE_AUTHOR;
+    }
 }
