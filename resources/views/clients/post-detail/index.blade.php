@@ -9,7 +9,7 @@
                 <div class=" col-lg-9   mb-5 mb-lg-0">
                     <article>
                         <div class="post-slider mb-4">
-                            <img src="images/post/post-2.jpg" class="card-img" alt="post-thumb">
+                            <img src="{{ env('APP_STORAGE_IMG') }}/post/{{ $dataPost->img }}" class="card-img" alt="post-thumb">
                         </div>
 
                         <h1 class="h2">{{ $dataPost->title }}</h1>
@@ -36,15 +36,9 @@
                             </li>
                         </ul>
                         <div class="content">
-                            @php
-                                $content = $dataPost->content;
-                                $maxLength = 255;
-                                if (strlen($content) > $maxLength) {
-                                    $content = substr($content, 0, $maxLength) . '...';
-                                }
-                            @endphp
-                            {!! $content !!}
+                            {!! $dataPost->content !!}
                         </div>
+                        
                     </article>
 
                 </div>

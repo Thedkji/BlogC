@@ -30,8 +30,8 @@ Route::prefix('client')
     ->name('client.')
     ->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('index');
-        Route::get('/{id}/category', [CategoryController::class, 'category'])->name('category');
-        Route::get('/{id}/post-detail', [PostController::class, 'postDetail'])->name('postDetail');
+        Route::get('/category/{id}', [CategoryController::class, 'category'])->name('category');
+        Route::get('/post-detail/{id}', [PostController::class, 'postDetail'])->name('postDetail');
         Route::get('/search', [PostController::class, 'search'])->name('search');
     });
 

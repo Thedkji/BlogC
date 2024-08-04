@@ -10,7 +10,7 @@
                 <a href="#!" class="h4 d-inline-block mb-3">{{ $dataPost->author->name }}</a>
 
                 <p>
-                    {{ $comment->comment  }}
+                    {!! $comment->comment  !!}
                 </p>
 
                 <span class="text-black-800 mr-3 font-weight-600">{{ \Carbon\Carbon::parse( $comment->created_at)->diffForHumans() }}</span>

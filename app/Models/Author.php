@@ -11,15 +11,12 @@ class Author extends Model
     use SoftDeletes;
     use HasFactory;
     protected $fillable = [
-        'user_name',
-        'pass',
         'name',
+        'user_id',
         'avatar',
         'bio',
         'date_of_birth',
-        'email',
         'phone',
-        'role'
     ];
 
     public function posts()

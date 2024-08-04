@@ -18,6 +18,7 @@ class CommentSeeder extends Seeder
             Comment::create([
                 "post_id" => mt_rand(1, 20),
                 "author_id" => mt_rand(1, 20),
+                "user_id" => mt_rand(1, 20),
                 "comment" => fake()->text(),
             ]);
         }

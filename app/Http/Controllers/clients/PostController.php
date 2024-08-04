@@ -22,9 +22,17 @@ class PostController extends Controller
         //     //where `posts`.`id` = `post_tags`.`post_id`) as `tags
         // ];
         // // dd($data);
-        $postNew =  Post::with(['tags', 'author'])->orderByDesc('id')->paginate(3);
-        $postTrend =  Post::get()->where('view_like', '>', 100);
-        $postPopular =  Post::with('author', 'tags')->withCount('tags')->orderByDesc('tags_count')->first();
+        $postNew =  Post::with(['tags', 'author'])
+            ->orderByDesc('id')
+            ->paginate(3);
+
+        $postTrend =  Post::get()
+            ->where('view_like', '>', 100);
+
+        $postPopular =  Post::with('author', 'tags')
+            ->withCount('tags')
+            ->orderByDesc('tags_count')
+            ->first();
 
         return view('clients.home.home', compact(
             'postNew',

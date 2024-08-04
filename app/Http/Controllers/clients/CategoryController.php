@@ -11,7 +11,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function category($id)
+    public function category($id = null)
     {
         $cate = Category::find($id);
 

@@ -6,7 +6,7 @@
                 @foreach ($postNew as $post)
                     <article class="card mb-4">
                         <div class="post-slider">
-                            <a href="{{ route('client.postDetail',$post->id ) }}"><img src="images/post/post-10.jpg" class="card-img-top" alt="post-thumb"></a>
+                            <a href="{{ route('client.postDetail',$post->id ) }}"><img src="{{ env('APP_STORAGE_IMG') }}/post/{{ $post->img }}" class="card-img-top" alt="post-thumb"></a>
                         </div>
                         <div class="card-body">
                             <h3 class="mb-3"><a class="post-title" href="###"></a></h3>

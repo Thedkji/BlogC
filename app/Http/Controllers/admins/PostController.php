@@ -43,9 +43,12 @@ class PostController extends Controller
             if ($fileName) {
                 $data['img'] = $fileName; //thêm dữ liệu mới vào mảng
             }
+            Post::query()->create($data);  //dữ liệu mới sau khi đã sử lý ảnh
+        } else {
+            Post::query()->create($request->all());
         };
 
-        Post::query()->create($data);  //dữ liệu mới sau khi đã sử lý ảnh
+
         return Redirect()->route('admin.post.index')->with('message', "Thêm thành công");
     }
 
