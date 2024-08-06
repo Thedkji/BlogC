@@ -13,19 +13,17 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
-    const TYPE_CLIENT = 0;
-    const TYPE_ADMIN = 1;
-    const TYPE_AUTHOR = 2;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+    public const IS_AUTHOR = 'author';
+    public const IS_ADMIN = 'admin';
     protected $fillable = [
         'email',
         'password',
-        'type',
+        'role',
     ];
 
     /**
@@ -47,18 +45,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function isClient()
+    public function author()
     {
-        return $this->type == self::TYPE_CLIENT;
+        return $this->belongsTo(Author::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
+    public function isAuthor()
+    {
+        return $this->role === self::IS_AUTHOR;
     }
 
     public function isAdmin()
     {
-        return $this->type == self::TYPE_ADMIN;
-    }
-
-    public function isAuthor()
-    {
-        return $this->type == self::TYPE_AUTHOR;
+        return $this->role === self::IS_ADMIN;
     }
 }

@@ -39,7 +39,7 @@ Route::prefix('client')
 Route::prefix('admin')
     ->name('admin.')
     ->group(function () {
-        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard')->middleware('isAdmin');
 
         // Login
         Route::get('/login', [UserController::class, 'login'])->name('login');
@@ -52,11 +52,16 @@ Route::prefix('admin')
         // Logout
         Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
+        // Forgot pass
         Route::get('/forgot-pass', [UserController::class, 'forgotPass'])->name('forgot-pass');
+
+        //Verify Email
+        Route::get('/verify-email/{email}', [UserController::class, 'verifyEmail'])->name('verify-email');
 
         // Categories
         Route::name('category.')
             ->controller(AdminsCategoryController::class)
+            ->middleware('isAdmin')
             ->group(function () {
                 Route::get('/category', 'index')->name('index');
                 Route::get('/category/create', 'create')->name('create');
@@ -69,6 +74,7 @@ Route::prefix('admin')
         // Posts
         Route::name('post.')
             ->controller(AdminsPostController::class)
+            ->middleware('isAdmin')
             ->group(function () {
                 Route::get('/post', 'index')->name('index');
                 Route::get('/post/create', 'create')->name('create');

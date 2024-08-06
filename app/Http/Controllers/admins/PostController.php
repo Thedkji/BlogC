@@ -12,8 +12,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        $dataPost = Post::query()->latest('id')->paginate(5); 
-        
+        $dataPost = Post::query()->latest('id')->paginate(5);
+
         return view('admin.posts.post', compact('dataPost'));
     }
 
@@ -38,7 +38,7 @@ class PostController extends Controller
             $fileName = time() . "_" . $file->getClientOriginalName();
             $file->storeAs('imgs/post', $fileName);
 
-            $data = $request->except('img'); //loại bỏ trường img ra khỏi request debug ra sẽ thấy data là 1 mảng
+            $data = $request->except(['img', '_method', '_token']); //loại bỏ trường img ra khỏi request debug ra sẽ thấy data là 1 mảng
             // dd($data);
             if ($fileName) {
                 $data['img'] = $fileName; //thêm dữ liệu mới vào mảng
@@ -84,17 +84,17 @@ class PostController extends Controller
             $file->storeAs('imgs/post', $fileName);
 
             //Kiểm tra nếu có file thì loại bỏ trường img cũ trong model và tiến hành create
-            $data = $request->except('img'); //loại bỏ trường img ra khỏi request debug ra sẽ thấy data là 1 mảng
+            $data = $request->except(['img', '_method', '_token']); //loại bỏ trường img ra khỏi request debug ra sẽ thấy data là 1 mảng
             // dd($data);
             if ($fileName) {
                 $data['img'] = $fileName; //thêm dữ liệu img mới vào mảng
             }
         } else {
-            $data = $request->except('img'); //loại bỏ trường img để lấy data 
+            $data = $request->except(['img', '_method', '_token']); //loại bỏ trường img ra khỏi request debug ra sẽ thấy data là 1 mảng
             $data['img'] = $post->img; //giữ nguyên hình ảnh nếu ko thay đổi
         };
 
-        Post::query()->update($data);  //dữ liệu mới sau khi đã sử lý ảnh
+        $post->update($data);  //dữ liệu mới sau khi đã sử lý ảnh
         return redirect()->route('admin.post.edit', $id)->with('message', 'Sửa thành công');
     }
 

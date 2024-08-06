@@ -11,11 +11,6 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div>
-                                @session('message')
-                                    <p class="alert alert-success">{{ session('message') }}</p>
-                                @endsession
-                            </div>
                             <div class="card-header">
                                 <h4 class="card-title mb-0">Danh sách loại tin</h4>
                             </div><!-- end card header -->

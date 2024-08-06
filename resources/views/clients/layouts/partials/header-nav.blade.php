@@ -3,9 +3,7 @@
         <img class="img-fluid" width="100px" src="{{ env('APP_URL') }}/reader/images/logo.png"
             alt="Reader | Hugo Personal Blog Template">
     </a>
-    @error('message')
-        <p class="alert alert-success">{{ session('message') }}</p>
-    @enderror
+
     <div class="collapse navbar-collapse text-center order-lg-2 order-3" id="navigation">
         <ul class="navbar-nav mx-auto">
             <li class="nav-item dropdown">
@@ -42,27 +40,34 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.login') }}">Đăng Nhập</a>
                 </li>
-            @endif
-
-            @if (Auth::check() && Auth::user()->type == 0)
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.logout') }}">Đăng xuất</a>
+            @elseif (Auth::check() && Auth::user()->role === 'author')
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="###">
+                        Chức năng <i class="ti-angle-down ml-1"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="###">Thông tin cá nhân</a>
+                        <a class="dropdown-item" href="###">Đăng Bài</a>
+                        <a class="dropdown-item" href="{{ route('admin.logout') }}">Đăng Xuất</a>
+                    </div>
+                </li>
+            @elseif (Auth::check() && Auth::user()->role === 'admin')
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="###">
+                        Chức năng <i class="ti-angle-down ml-1"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Trang quản trị</a>
+                        <a class="dropdown-item" href="###">Thông tin</a>
+                        <a class="dropdown-item" href="###">Đăng Bài</a>
+                        <a class="dropdown-item" href="{{ route('admin.logout') }}">Đăng Xuất</a>
+                    </div>
                 </li>
             @endif
 
-            @if (Auth::check() && Auth::user()->type == 1)
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                    <a class="nav-link" href="{{ route('admin.logout') }}">Đăng xuất</a>
-                </li>
-            @endif
-
-            @if (Auth::check() && Auth::user()->type == 2)
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.login') }}">Đăng bài</a>
-                    <a class="nav-link" href="{{ route('admin.logout') }}">Đăng xuất</a>
-                </li>
-            @endif
+            @session('message')
+                <p class="alert alert-success">{{ session('message') }}</p>
+            @endsession
         </ul>
     </div>
 

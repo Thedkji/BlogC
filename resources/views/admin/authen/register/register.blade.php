@@ -13,7 +13,6 @@
                                 <img src="assets/images/logo-light.png" alt="" height="20">
                             </a>
                         </div>
-                        <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
                     </div>
                 </div>
             </div>
@@ -46,7 +45,7 @@
                                         <label for="password" class="form-label">Mật khẩu <span
                                                 class="text-danger">*</span></label>
                                         <input type="password" class="form-control" id="password" name="password"
-                                            placeholder="Nhập mật khẩu của bạn" value="{{ old('password') }}">
+                                            placeholder="Nhập mật khẩu của bạn">
                                         @error('password')
                                             <p class="alert alert-danger mt-2">{{ $message }}</p>
                                         @enderror
@@ -62,6 +61,23 @@
                                         @enderror
                                     </div>
 
+                                    {{-- <div class="mb-3">
+                                        <label for="username" class="form-label">Chọn quyền<span
+                                                class="text-danger">*</span></label>
+                                        <select name="type" id="" class="form-select">
+                                            <option value="">Chọn lựa quyền (Bạn có thể đổi lại trong trang thông tin)
+                                            </option>
+                                            <option value="0">Người dùng thường(chỉ xem nội dung không có chức năng
+                                                đăng bài)</option>
+                                            <option value="1">Người dùng là tác giả(xem nội dung và có chức năng đăng
+                                                bài)</option>
+                                        </select>
+
+                                        @error('type')
+                                            <p class="alert alert-danger mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div> --}}
+
                                     <div class="mt-4">
                                         <button class="btn btn-success w-100" type="submit">Đăng ký</button>
                                     </div>
@@ -76,7 +92,7 @@
                     <!-- end card -->
 
                     <div class="mt-4 text-center">
-                        <p class="mb-0">Bạn đã có tài khoản ?<a href="auth-signin-basic.html"
+                        <p class="mb-0">Bạn đã có tài khoản ?<a href="{{ route('admin.login') }}"
                                 class="fw-semibold text-primary text-decoration-underline"> Đăng nhập </a> </p>
                     </div>
 

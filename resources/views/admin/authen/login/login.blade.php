@@ -17,7 +17,6 @@
                                     <img src="assets/images/logo-light.png" alt="" height="20">
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
                         </div>
                     </div>
                 </div>
@@ -38,23 +37,40 @@
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Email</label>
                                             <input type="text" class="form-control" id="email"
-                                                placeholder="Nhập email đã đăng ký" name="email">
+                                                placeholder="Nhập email đã đăng ký" name="email"
+                                                value="{{ old('email') }}">
                                         </div>
+                                        @error('email')
+                                            <p class="alert alert-danger mt-2">{{ $message }}</p>
+                                        @enderror
 
                                         <div class="mb-3">
                                             <div class="float-end">
-                                                <a href="" class="text-muted">
+                                                <a href="{{ route('admin.forgot-pass') }}" class="text-muted">
                                                     Quên mật khẩu</a>
                                             </div>
+
                                             <label class="form-label" for="password-input">Mật khẩu</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
                                                 <input type="password" class="form-control pe-5 password-input"
                                                     placeholder="Nhập mật khẩu của bạn" id="password-input" name="password">
-                                                <button
+                                                    <button
                                                     class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                                                     type="button" id="password-addon"><i
                                                         class="ri-eye-fill align-middle"></i></button>
                                             </div>
+                                            @error('password')
+                                                <p class="alert alert-danger mt-2">{{ $message }}</p>
+                                            @enderror
+
+                                            @session('message')
+                                                <p class="alert alert-danger mt-2">{{ session('message') }}</p>
+                                            @endsession
+
+                                            @session('message2')
+                                                <p class="alert alert-success mt-2">{{ session('message2') }}</p>
+                                            @endsession
+
                                         </div>
 
                                         <div class="form-check">
@@ -66,12 +82,12 @@
                                         </div>
 
                                         <div class="mt-4">
-                                            <button class="btn btn-success w-100" type="submit">Đăng ký</button>
+                                            <button class="btn btn-success w-100" type="submit">Đăng Nhập</button>
                                         </div>
 
                                         <div class="mt-4 text-center">
                                             <div class="signin-other-title">
-                                                <h5 class="fs-13 mb-4 title">Sign In with</h5>
+                                                <h5 class="fs-13 mb-4 title">Đăng nhập với</h5>
                                             </div>
                                             <div>
                                                 <button type="button"
