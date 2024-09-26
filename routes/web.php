@@ -5,6 +5,7 @@ use App\Http\Controllers\admins\PostController as AdminsPostController;
 use App\Http\Controllers\admins\UserController;
 
 use App\Http\Controllers\clients\CategoryController;
+use App\Http\Controllers\clients\CommentController;
 use App\Http\Controllers\clients\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ Route::get('/', function () {
 
 // client
 
-// Post
+// Post (bài viết)
 Route::prefix('client')
     ->name('client.')
     ->group(function () {
@@ -33,6 +34,8 @@ Route::prefix('client')
         Route::get('/category/{id}', [CategoryController::class, 'category'])->name('category');
         Route::get('/post-detail/{id}', [PostController::class, 'postDetail'])->name('postDetail');
         Route::get('/search', [PostController::class, 'search'])->name('search');
+
+        Route::post('/comment/{id}', [CommentController::class, 'storeComment'])->name('comment');
     });
 
 // admin

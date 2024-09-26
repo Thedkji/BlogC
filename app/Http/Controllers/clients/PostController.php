@@ -44,7 +44,7 @@ class PostController extends Controller
     public function postDetail($id)
     {
         $dataPost = Post::with('author', 'comments', 'tags')->find($id);
-
+        // dd($dataPost);
         return view('clients.post-detail.index', compact(
             'dataPost',
         ));

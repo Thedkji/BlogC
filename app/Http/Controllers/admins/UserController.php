@@ -29,18 +29,36 @@ class UserController extends Controller
 
     public function loginPost(LoginRequest $request)
     {
+        //Kiểm tra xem checkbox remember có tồn tại ko
+        $remember = $request->has('remember');
+
+        //đối số thứ 2 sẽ tự động thêm data vào trường remember_token trong db và khi session login hết hạn
+        //thì trình duyệt sẽ dùng thằng remember để tự động login lại
         $data = Auth::attempt([
             'email' => $request->email,
             'password' => $request->password,
-        ]);
+        ], $remember);
 
         $user = Auth::user();
+
+        $request->session()->regenerate();
+
+
+        // Kiểm tra ng dùng đã đăng nhập nhưng chưa xác thực
         if ($data && is_null($user->email_verified_at)) {
             Auth::logout();
             return view('emails.email-verify-failed');
         }
-        $request->session()->regenerate();
 
+        //Kiểm tra xem người dùng có đăng nhập và tích nhớ phiên ko , nếu ko xóa trường
+        if ($data && !$remember) {
+            User::query()->where('email', $user->email)
+                ->update([
+                    "remember_token" => null
+                ]);
+        }
+
+        // Phân quyền người dùng
         if ($data && Auth::user()->role === "author") {
             return redirect()
                 ->route('client.index')
@@ -91,6 +109,7 @@ class UserController extends Controller
 
     public function forgotPass()
     {
+        return view('');
     }
 
     public function verifyEmail($email)  //Xác thực email ở mail gửi đi

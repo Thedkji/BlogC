@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="{{ env('APP_URL') }}/reader/plugins/slick/slick.css">
 
 <!-- Main Stylesheet -->
-<link rel="stylesheet" href="{{ env('APP_URL') }}/reader/css/style.css" media="screen">
+<link rel="stylesheet" href="{{ env('APP_URL') }}/reader/css/style.css?v={{ time() }}" media="screen">
 
 <!--Favicon-->
 <link rel="shortcut icon" href="{{ env('APP_URL') }}/reader/images/favicon.png" type="image/x-icon">

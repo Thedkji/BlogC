@@ -15,7 +15,8 @@ class Comment extends Model
         'author_id',
         'post_id',
         'user_id',
-        'comment'
+        'comment',
+        'name'
     ];
 
     public function author()

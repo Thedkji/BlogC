@@ -33,7 +33,7 @@
                                             <div class="d-flex justify-content-sm-end">
                                                 <div class="search-box ms-2">
                                                     <input type="text" class="form-control search"
-                                                        placeholder="Tìm kiếm loại tin ...">
+                                                        placeholder="Tìm kiếm tin ...">
                                                     <i class="ri-search-line search-icon"></i>
                                                 </div>
                                             </div>
@@ -67,7 +67,11 @@
                                                         <td>{{ $post->id }}</td>
                                                         <td>{{ $post->category_id }}</td>
                                                         <td>{{ $post->author_id }}</td>
-                                                        <td>{{ $post->title }}</td>
+                                                        <td>
+                                                            <div style="width:200px;overflow: hidden;">
+                                                                {{ $post->content }}
+                                                            </div>
+                                                        </td>
                                                         <td>{{ $post->img }}</td>
                                                         <td>
                                                             <div style="width:300px;overflow: hidden;">

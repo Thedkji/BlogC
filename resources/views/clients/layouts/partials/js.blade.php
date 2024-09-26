@@ -10,3 +10,5 @@
 
 <!-- Main Script -->
 <script src="{{ env('APP_URL') }}/reader/js/script.js"></script>
+
+

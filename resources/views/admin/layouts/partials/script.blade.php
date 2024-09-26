@@ -27,8 +27,8 @@
 <!-- gridjs init -->
 <script src="{{ env('APP_URL') }}/velzon/assets/js/pages/gridjs.init.js"></script>
 
-<!-- App js -->
-{{-- <script src="{{ env('APP_URL') }}/velzon/assets/js/app.js"></script> --}}
+{{-- <!-- App js -->
+<script src="{{ env('APP_URL') }}/velzon/assets/js/app.js"></script> --}}
 
 {{-- CKEditor --}}
 {{-- <script src="{{ env('APP_URL') }}/ckeditor5-42.0.2/ckeditor5/ckeditor5.css"></script> --}}

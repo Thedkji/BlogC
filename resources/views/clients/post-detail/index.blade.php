@@ -1,15 +1,18 @@
 @extends('clients.layouts.master')
 
 @section('title', 'PostDetail')
-
 @section('content')
+    {{-- component điều chỉnh scroll --}}
+    @include('clients.components.scrollTo')
+
     <section class="section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class=" col-lg-9   mb-5 mb-lg-0">
                     <article>
                         <div class="post-slider mb-4">
-                            <img src="{{ env('APP_STORAGE_IMG') }}/post/{{ $dataPost->img }}" class="card-img" alt="post-thumb">
+                            <img src="{{ env('APP_STORAGE_IMG') }}/post/{{ $dataPost->img }}" class="card-img"
+                                alt="post-thumb">
                         </div>
 
                         <h1 class="h2">{{ $dataPost->title }}</h1>
@@ -38,7 +41,7 @@
                         <div class="content">
                             {!! $dataPost->content !!}
                         </div>
-                        
+
                     </article>
 
                 </div>
@@ -49,6 +52,14 @@
 
             </div>
         </div>
+
+        @session('error')
+            <p class="alert alert-danger">{{ session('error') }}</p>
+        @endsession
+
+        @session('message')
+            <p class="alert alert-success">{{ session('message') }}</p>
+        @endsession
     </section>
 
 @endsection
